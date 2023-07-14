@@ -4,8 +4,8 @@ module.exports = {
 	description: 'Requests for a custom emoji to be added to the server.',
 	execute(msg, members, mod) {
 		delete require.cache[require.resolve('../db/pending-emoji.json')];
-		var emojiList = msg.channel.guild.emojis.cache;
-		var command = msg.content.replace(/ +(?= )/g, '');
+		const emojiList = msg.channel.guild.emojis.cache;
+		let command = msg.content.replace(/ +(?= )/g, '');
 		command = command.split(' ');
 
 		const checkEmojiName = (name) => {
@@ -14,7 +14,7 @@ module.exports = {
 
 		if (command[1].includes('-') || command[1].includes('.'))
 			command[1] = command[1].replace(/[.-]/g, '_');
-		var regex = RegExp(/^\w+$/);
+		const regex = RegExp(/^\w+$/);
 		console.log(command);
 		if (regex.test(command[1])) {
 			if (!msg.attachments.size > 0) {
@@ -23,7 +23,8 @@ module.exports = {
 					url: command[2],
 					name: command[1].toLowerCase(),
 				};
-			} else {
+			}
+			else {
 				newEmoji = {
 					id: `${msg.id}E`,
 					url: msg.attachments.array()[0].url,
@@ -35,7 +36,8 @@ module.exports = {
 				msg.channel.send(
 					`An emoji with the name "${newEmoji.name}" already exists. Please choose a different name.`
 				);
-			} else {
+			}
+			else {
 					var data = fs.readFileSync('db/pending-emoji.json');
 					var json = JSON.parse(data);
 					json.newEmoji.push(newEmoji);

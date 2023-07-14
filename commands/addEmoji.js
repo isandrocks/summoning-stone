@@ -8,10 +8,10 @@ module.exports = {
 		const pendingEmoji = pending.newEmoji;
 		const newEmoji = pendingEmoji.find(({ id }) => id === args.toString());
 		if (newEmoji) {
-			var filtered = pendingEmoji.filter(function (emj) {
+			const filtered = pendingEmoji.filter((emj) => {
 				return emj.id !== newEmoji.id;
 			});
-			var newPending = { newEmoji: filtered };
+			const newPending = { newEmoji: filtered };
 			fs.writeFile(
 				'db/pending-emoji.json',
 				JSON.stringify(newPending, null, 2),

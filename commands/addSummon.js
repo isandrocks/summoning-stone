@@ -13,9 +13,9 @@ module.exports = {
 
 			fs.readFile('db/members.json', (err, data) => {
 				if (err) throw err;
-				var json = JSON.parse(data);
+				const json = JSON.parse(data);
 				json.members.push(newMember);
-				var members = { members: json.members };
+				const members = { members: json.members };
 				fs.writeFile(
 					'db/members.json',
 					JSON.stringify(members, null, 2),
@@ -25,10 +25,10 @@ module.exports = {
 					}
 				);
 			});
-			var filtered = pendingMembers.filter(function (mem) {
+			const filtered = pendingMembers.filter((mem) => {
 				return mem.id !== newMember.id;
 			});
-			var newPending = { newMembers: filtered };
+			const newPending = { newMembers: filtered };
 			fs.writeFile(
 				'db/pending-members.json',
 				JSON.stringify(newPending, null, 2),

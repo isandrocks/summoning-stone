@@ -5,4 +5,5 @@ members.json
 pending-members.json
 pending-emoji.json
 channels.json
+.eslintrc.json
 /db

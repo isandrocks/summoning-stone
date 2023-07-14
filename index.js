@@ -19,45 +19,45 @@ const members = allMembers.members;
 // Channel IDs for quick switching
 const channels = require('./db/channels.json');
 
-//Initiate bot
+//	Initiate bot
 client.on('ready', () => {
-	var summon = client.channels.cache.get(channels.summon);
+	let summon = client.channels.cache.get(channels.summon);
 	client.commands.get('clearChannel').execute(summon);
 	client.commands.get('summonMessage').execute(summon);
 });
-//Listen for reactions
+//	Listen for reactions
 client.on('messageReactionAdd', (reaction, user) => {
-	var channel = reaction.message.channel;
+	const channel = reaction.message.channel;
 
 	if (user.bot) return;
 
-	//Only checks for human reacts in these channels
+	//	Only checks for human reacts in these channels
 	if (channel.id == channels.summon) {
 		client.commands.get('summonMember').execute(reaction, user, members);
 	}
-	//Mod channel acceptance/rejection
+	//	Mod channel acceptance/rejection
 	if (channel.id == channels.mod) {
 		client.commands.get('modReview').execute(reaction);
 	}
 });
-//Listen for messages
+//	Listen for messages
 client.on('message', (msg) => {
-	var summon = client.channels.cache.get(channels.summon);
-	var mod = client.channels.cache.get(channels.mod);
-	var userID = msg.author.id;
+	let summon = client.channels.cache.get(channels.summon);
+	const mod = client.channels.cache.get(channels.mod);
+	const userID = msg.author.id;
 
-	//Delete a summon if the user sends a message
+	//	Delete a summon if the user sends a message
 	summon.messages.cache.forEach((msg) => {
 		if (msg.mentions.has(userID)) {
 			msg.delete();
 		}
 	});
 
-	//Check for command prefix
+	//	Check for command prefix
 	if (!msg.content.startsWith(prefix)) return;
 	const args = msg.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift();
-	//Global Commands
+	//	Global Commands
 	if (!msg.author.bot) {
 		switch (command) {
 			case 'help':
@@ -78,24 +78,25 @@ client.on('message', (msg) => {
 		}
 		// if(msg.content.startsWith(prefix + command)) client.commands.get(command).execute(msg, members, mod);
 	}
-	//Mod Channel Commands
+	//	Mod Channel Commands
 	if (msg.channel.id == mod && msg.author.bot) {
-		pend = args.toString();
+		let pend = args.toString();
 
 		switch (
-			command //If a command needs approval, create reactions for easy approval
+		command //	If a command needs approval, create reactions for easy approval
 		) {
 			case 'Approval':
 				msg.react('👍').then(() => msg.react('👎'));
 				break;
 			case 'Approved':
 				if (pend.endsWith('S')) {
-					//Add user to Summoning Stone
+					//	Add user to Summoning Stone
 					client.commands.get('addSummon').execute(args);
 					client.commands.get('clearChannel').execute(summon);
 					client.commands.get('summonMessage').execute(summon);
-				} else if (pend.endsWith('E')) {
-					//Add custom emoji
+				}
+				else if (pend.endsWith('E')) {
+					//	Add custom emoji
 					client.commands.get('addEmoji').execute(msg, args);
 				}
 				break;
@@ -105,9 +106,9 @@ client.on('message', (msg) => {
 		}
 	}
 });
-//Listen for voice channel changes
+//	Listen for voice channel changes
 client.on('voiceStateUpdate', (oldMember, newMember) => {
-	var summon = client.channels.cache.get(channels.summon);
+	let summon = client.channels.cache.get(channels.summon);
 	summon.messages.cache.forEach((msg) => {
 		if (msg.mentions.has(newMember.id)) {
 			msg.delete();
