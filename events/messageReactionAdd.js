@@ -1,6 +1,6 @@
 const { Events, } = require('discord.js');
-const { summonid } = require('./config.json');
-const allMembers = require('./db/members.json');
+const { summonid } = require('../config.json');
+const allMembers = require('../db/members.json');
 const members = allMembers.members;
 
 module.exports = {

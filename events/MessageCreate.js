@@ -1,5 +1,5 @@
 const { Events, } = require('discord.js');
-const { summonid, modid } = require('./config.json');
+const { summonid, modid } = require('../config.json');
 const allMembers = require('./db/members.json');
 const members = allMembers.members;
 
