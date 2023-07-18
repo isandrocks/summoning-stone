@@ -1,6 +1,6 @@
 const fs = require('fs');
 module.exports = {
-	name: 'addEmoji',
+	data: 'addEmoji',
 	description: 'Adds the approved emoji to the server.',
 	async execute(msg, args) {
 		delete require.cache[require.resolve('../db/pending-emoji.json')];

@@ -1,5 +1,5 @@
 module.exports = {
-	name: 'clearChannel',
+	data: 'clearChannel',
 	description: 'Deletes the last 100 messages',
 	async execute(msg) {
 		console.log('Clearing messages...');

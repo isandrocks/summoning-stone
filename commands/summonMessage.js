@@ -1,5 +1,5 @@
 module.exports = {
-	name: 'summonMessage',
+	data: 'summonMessage',
 	description:
 		'Posts the main Summoning Stone message that members can use to summon others.',
 	async execute(summon) {

@@ -1,5 +1,5 @@
 module.exports = {
-	name: 'reload',
+	data: 'reload',
 	description: 'Reloads a command',
 	args: true,
 	async execute(message, args) {

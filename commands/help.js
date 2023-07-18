@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 module.exports = {
-	name: 'help',
+	data: 'help',
 	description: 'Sends a message that displays all available commands.',
 	async execute(msg) {
 		const helpEmbed = new Discord.MessageEmbed()

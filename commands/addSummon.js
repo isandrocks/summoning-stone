@@ -1,6 +1,6 @@
 const fs = require('fs');
 module.exports = {
-	name: 'addSummon',
+	data: 'addSummon',
 	description: 'Adds the approved member to the Summoning Stone',
 	async execute(args) {
     console.log('firing');

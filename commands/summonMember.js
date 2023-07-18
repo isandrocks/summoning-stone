@@ -1,5 +1,5 @@
 module.exports = {
-	name: 'summonMember',
+	data: 'summonMember',
 	description:
 		'Mentions the corresponding user when their emoji is reacted to.',
 	async execute(reaction, user, members) {
