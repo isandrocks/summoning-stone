@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 module.exports = {
 	name: 'help',
 	description: 'Sends a message that displays all available commands.',
-	execute(msg) {
+	async execute(msg) {
 		const helpEmbed = new Discord.MessageEmbed()
 			.setColor('#0099ff')
 			.setTitle('Summoning Stone Commands')

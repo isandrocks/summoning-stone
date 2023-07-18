@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'modReview',
 	description: 'Send approval status once item has been reviewed.',
-	execute(reaction) {
+	async execute(reaction) {
 		const args = reaction.message.content.split(' ');
 		const id = args[2];
 		if (reaction.emoji.name === '👍') {

@@ -2,7 +2,7 @@ const fs = require('fs');
 module.exports = {
 	name: 'addSummon',
 	description: 'Adds the approved member to the Summoning Stone',
-	execute(args) {
+	async execute(args) {
     console.log('firing');
 		delete require.cache[require.resolve('../db/pending-members.json')];
 		const pending = require('../db/pending-members.json');

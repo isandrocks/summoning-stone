@@ -2,7 +2,7 @@ module.exports = {
 	name: 'summonMember',
 	description:
 		'Mentions the corresponding user when their emoji is reacted to.',
-	execute(reaction, user, members) {
+	async execute(reaction, user, members) {
 		const emoji = reaction.emoji;
 		const mentions = reaction.message.channel.messages.cache;
 		const userMention = mentions.map((a) => a.content);

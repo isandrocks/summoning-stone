@@ -2,7 +2,7 @@ const fs = require('fs');
 module.exports = {
 	name: 'reqEmoji',
 	description: 'Requests for a custom emoji to be added to the server.',
-	execute(msg, members, mod) {
+	async execute(msg, members, mod) {
 		delete require.cache[require.resolve('../db/pending-emoji.json')];
 		const emojiList = msg.channel.guild.emojis.cache;
 		let command = msg.content.replace(/ +(?= )/g, '');

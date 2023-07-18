@@ -2,7 +2,7 @@ const fs = require('fs');
 module.exports = {
 	name: 'reqSummon',
 	description: 'Requests to be added the Summoning Stone.',
-	execute(msg, members, mod) {
+	async execute(msg, members, mod) {
 		var newMember = null;
 		var emojiList = mod.guild.emojis.cache;
 		const summonExists = () => {
