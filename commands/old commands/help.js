@@ -1,7 +1,9 @@
 const Discord = require('discord.js');
+
 module.exports = {
-	data: 'help',
-	description: 'Sends a message that displays all available commands.',
+	data: new Discord.SlashCommandBuilder()
+		.setName('help')
+		.setDescription('Sends a message that displays all available commands.'),
 	async execute(msg) {
 		const helpEmbed = new Discord.MessageEmbed()
 			.setColor('#0099ff')

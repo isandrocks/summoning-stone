@@ -1,12 +1,16 @@
 const { Events } = require('discord.js');
-const { summonid } = require('../config.json');
 
 module.exports = {
 	name: Events.ClientReady,
 	once: true,
 	execute(client) {
 		console.log(`Ready! Logged in as ${client.user.tag}`);
-		client.commands.get('clearChannel').execute(summonid);
-		client.commands.get('summonMessage').execute(summonid);
+		try {
+			// console.log(client);
+			client.commands.get('clearchannel').execute(client);
+			// client.commands.get('summonMessage').execute(client);
+		} catch (error) {
+			console.error(`ERROR FROM READY EVENT: ${error}`);
+		}
 	},
 };
