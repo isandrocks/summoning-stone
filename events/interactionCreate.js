@@ -1,10 +1,19 @@
 const { Events, Collection } = require('discord.js');
+const { summonid } = require('../config.json');
 
 module.exports = {
 	name: Events.InteractionCreate,
 	async execute(interaction) {
 
-		if (!interaction.isChatInputCommand()) return;
+		console.log(interaction);
+
+		if (interaction.isButton()) {
+			if (interaction.channelId === summonid) {
+				return interaction.client.commands.get('summon-member').execute(interaction);
+			}
+		}
+
+		if (!interaction.isChatInputCommand()) return; // I should turn this into a if block instead of just a cut off with return
 
 		const command = interaction.client.commands.get(interaction.commandName);
 
