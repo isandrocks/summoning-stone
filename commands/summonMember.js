@@ -16,21 +16,39 @@ module.exports = {
 		.setName('summon-member')
 		.setDescription('Mentions the corresponding user when their emoji is clicked.'),
 	async execute(reaction) {
-		let memberSum;
+		let memberName;
+		const channel = reaction.channel;
+		const { summons } = reaction.client;
 
 		if (reaction.replied) {
 			reaction.deleteReply();
 		}
 
 		if (reaction.isButton()) {
-			memberSum = reaction.customId;
+			memberName = reaction.customId;
 		} else {
-			memberSum = reaction.user;
+			memberName = reaction.user;
+		}
+
+		if (summons.has(memberName)) {
+			await channel.messages.delete(summons.get(memberName));
+			await summons.delete(memberName);
 		}
 
 		try {
-			const memCode = findCodeByName(memberSum);
-			reaction.reply(`Summoning: ${memCode}`);
+			const memCode = findCodeByName(memberName);
+			let sumMsg;
+
+			await reaction.reply({
+				content: `Summoning: ${memCode}`,
+				fetchReply: true
+			})
+			.then(msg => sumMsg = msg);
+
+			console.log(sumMsg);
+			summons.set(memberName, sumMsg.id);
+
+
 		} catch (error) {
 			console.error(`ERROR FROM SUMMON MEMBER COMMAND: ${error}`);
 		}
