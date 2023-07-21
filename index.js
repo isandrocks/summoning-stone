@@ -3,12 +3,14 @@ const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
+// Client setup
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-// Slash Command Handling
 client.cooldowns = new Collection();
 client.commands = new Collection();
+client.summons = new Collection();
 
+// Slash Command Handling
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
