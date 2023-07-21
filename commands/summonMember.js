@@ -45,9 +45,7 @@ module.exports = {
 			})
 			.then(msg => sumMsg = msg);
 
-			console.log(sumMsg);
 			summons.set(memberName, sumMsg.id);
-
 
 		} catch (error) {
 			console.error(`ERROR FROM SUMMON MEMBER COMMAND: ${error}`);
