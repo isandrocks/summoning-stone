@@ -27,7 +27,7 @@ module.exports = {
 		}
 
 		try {
-			const msg = await channel.messages.fetch({ limit: 100 });
+			const msg = await channel.messages.fetch({ limit: 100, cache: false });
 			const msgArr = Array.from(msg);
 			const msgIds = msgArr.map(subArr => subArr[0]);
 
