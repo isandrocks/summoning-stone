@@ -4,16 +4,21 @@ const { summonid } = require('../config.json');
 module.exports = {
     name: Events.VoiceStateUpdate,
     async execute(oldMember, newMember) {
-        console.log(newMember);
-        const client = newMember.client;
+
+        const client = oldMember.client;
         const summon = client.channels.cache.get(summonid);
 
-        console.log(client);
+        const summonMsgs = await summon.messages.fetch({ limit: 100, cache: false });
 
-        summon.messages.cache.forEach((msg) => {
-            if (msg.mentions.has(newMember.id)) {
-                msg.delete();
-            }
-        });
+        try {
+            await summonMsgs.forEach((msg) => {
+                if (msg.mentions.has(newMember.id)) {
+                    msg.delete();
+                    client.summons.delete(`<@${newMember.id}>`);
+                }
+            });
+        } catch (error) {
+            console.error(`ERROR FROM VOICE STATE UPDATE: ${error}`);
+        }
     }
 };

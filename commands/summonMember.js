@@ -31,8 +31,12 @@ module.exports = {
 		}
 
 		if (summons.has(memberName)) {
-			await channel.messages.delete(summons.get(memberName));
-			await summons.delete(memberName);
+			try {
+				await channel.messages.delete(summons.get(memberName));
+				await summons.delete(memberName);
+			} catch (error) {
+				console.error(`ERROR FROM SUMMON MEMBER COMMAND: Error when trying to delete users from the summons collection ${error}`);
+			}
 		}
 
 		try {
@@ -43,7 +47,7 @@ module.exports = {
 				content: `Summoning: ${memCode}`,
 				fetchReply: true
 			})
-			.then(msg => sumMsg = msg);
+				.then(msg => sumMsg = msg);
 
 			summons.set(memberName, sumMsg.id);
 

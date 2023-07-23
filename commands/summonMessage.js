@@ -6,7 +6,7 @@ const buttonArray = [];
 
 members.forEach((ele, i) => {
     buttonArray.push(new ButtonBuilder()
-        .setCustomId(members[i].name)
+        .setCustomId(members[i].code)
         .setStyle(ButtonStyle.Secondary)
         .setEmoji(members[i].emoji));
 });

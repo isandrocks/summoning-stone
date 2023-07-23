@@ -5,7 +5,7 @@ module.exports = {
 	name: Events.InteractionCreate,
 	async execute(interaction) {
 
-		console.log(interaction);
+		// console.log(interaction);
 
 		if (interaction.isButton()) {
 			if (interaction.channelId === summonid) {
