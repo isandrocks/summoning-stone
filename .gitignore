@@ -7,4 +7,4 @@ pending-emoji.json
 channels.json
 .eslintrc.json
 /db
-commands/oldCommands
+**/commands/oldCommands
